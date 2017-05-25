@@ -1,4 +1,5 @@
-﻿using StockPrices.File;
+﻿using StockPrices.Excel;
+using StockPrices.File;
 using StockPrices.Helper;
 using StockPrices.Models;
 using StockPrices.Parser;
@@ -17,12 +18,14 @@ namespace StockPrices.Ticker
         private IFileService _file;
         private IHelpService _helper;
         private ICsvParser _csvService;
+        private IExcelService _excelService;
 
-        public TickerService(IFileService file, IHelpService helper, ICsvParser csvService)
+        public TickerService(IFileService file, IHelpService helper, ICsvParser csvService, IExcelService excelService)
         {
             _file = file;
             _helper = helper;
             _csvService = csvService;
+            _excelService = excelService;
         }
 
         /// <summary
@@ -42,6 +45,7 @@ namespace StockPrices.Ticker
             }
 
             List<Stock> stocks = _csvService.Parse(data);
+            _excelService.PopulateExcel(stocks);
         }
 
         /// <summary>
