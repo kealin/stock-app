@@ -25,10 +25,10 @@ namespace StockPrices.Menu
         public void EntryScreen()
         {
             Console.Clear();
-            Console.WriteLine("Specify task \n");
+            Console.WriteLine("Specify task" + Environment.NewLine);
             Console.WriteLine("1. Refresh data based on current ticker list");
             Console.WriteLine("2. Add new ticker");
-            Console.WriteLine("3. Remove existing ticker \n");
+            Console.WriteLine("3. Remove existing ticker" + Environment.NewLine);
 
             Console.Write("Specify choice: ");
 
