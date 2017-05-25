@@ -1,4 +1,5 @@
 ﻿using StockPrices.File;
+using StockPrices.Helper;
 using StockPrices.Models;
 using StockPrices.Parser;
 using System;
@@ -14,10 +15,14 @@ namespace StockPrices.Ticker
     public class TickerService : ITickerService
     {
         private IFileService _file;
+        private IHelpService _helper;
+        private ICsvParser _csvService;
 
-        public TickerService(IFileService file)
+        public TickerService(IFileService file, IHelpService helper, ICsvParser csvService)
         {
             _file = file;
+            _helper = helper;
+            _csvService = csvService;
         }
 
         /// <summary
@@ -28,7 +33,15 @@ namespace StockPrices.Ticker
         /// </remarks>
         public void Refresh()
         {
-            Console.WriteLine("TickerService :: Refreshing");
+            string data;
+            var tickers = _file.GetAll();
+            var url = _helper.BuildPredicate(tickers);
+            using (WebClient web = new WebClient())
+            {
+                 data = web.DownloadString(url);
+            }
+
+            List<Stock> stocks = _csvService.Parse(data);
         }
 
         /// <summary>
