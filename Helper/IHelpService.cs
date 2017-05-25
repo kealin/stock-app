@@ -8,6 +8,6 @@ namespace StockPrices.Helper
 {
     public interface IHelpService
     {
-        String BuildPredicate();
+        String BuildPredicate(List<String> tickers);
     }
 }

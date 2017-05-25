@@ -8,16 +8,28 @@ namespace StockPrices.Helper
 {
     public class HelpService : IHelpService
     {
+        private readonly string baseUrl = "http://finance.yahoo.com/d/quotes.csv";
+
+        public HelpService()
+        {
+
+        }
+
         /// <summary>
         /// Builds predicate based on user input
         /// </summary>
         /// <remarks>
         /// Currently supports ticker list only
         /// </remarks>
-        public String BuildPredicate()
+        public String BuildPredicate(List<String> tickers)
         {
-            //http://finance.yahoo.com/d/quotes.csv?s=+ +&f=snbaopl
-            return "thepredicate";
+            var predicateUrl = baseUrl + "?s=";
+            foreach(string ticker in tickers)
+            {
+                predicateUrl += ticker + "+";
+            }
+            predicateUrl += "&f=snbaopl";
+            return predicateUrl;
         }
     }
 }
