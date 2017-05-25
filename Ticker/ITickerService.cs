@@ -10,5 +10,6 @@ namespace StockPrices.Ticker
     {
         void AddNewTicker();
         void RemoveExistingTicker();
+        void Refresh();
     }
 }

@@ -1,7 +1,9 @@
-﻿using StockPrices.Models;
+﻿using StockPrices.File;
+using StockPrices.Models;
 using StockPrices.Parser;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -9,33 +11,25 @@ using System.Threading.Tasks;
 
 namespace StockPrices.Ticker
 {
-   public class TickerService : ITickerService
+    public class TickerService : ITickerService
     {
+        private IFileService _file;
+
+        public TickerService(IFileService file)
+        {
+            _file = file;
+        }
+
         /// <summary
         /// Refreshes data based on current ticker list
         /// </summary>
         /// <remarks>
         /// Ticker list fetched from Tickers.txt at project root
         /// </remarks>
-      /*  public void RefreshData()
-         {
-             Console.Clear();
-             string csvData;
-
-             using (WebClient web = new WebClient())
-             {
-                 csvData = web.DownloadString("1");
-             }
-
-             List<Stock> stocks = CsvParser.Parse(csvData);
-
-             foreach (Stock stock in stocks)
-             {
-                 Console.WriteLine(string.Format("{0} ({1})  Bid:{2} Offer:{3} Last:{4} Open: {5} PreviousClose:{6}", stock.Name, stock.Symbol, stock.Bid, stock.Ask, stock.Last, stock.Open, stock.PreviousClose));
-             }
-
-             Console.WriteLine("Refreshing data...");
-         } */
+        public void Refresh()
+        {
+            Console.WriteLine("TickerService :: Refreshing");
+        }
 
         /// <summary>
         /// Adds new ticker based on user input
@@ -45,9 +39,9 @@ namespace StockPrices.Ticker
         /// </remarks>
         public void AddNewTicker()
         {
-            Console.Clear();
-            Console.Write("Specify ticker: ");
+            Console.Write("Specify ticker to add: ");
             var ticker = Console.ReadLine();
+            _file.WriteToFile(ticker);
         }
 
         /// <summary>
@@ -58,9 +52,17 @@ namespace StockPrices.Ticker
         /// </remarks>
         public void RemoveExistingTicker()
         {
-            Console.Clear();
-            Console.Write("Specify ticker: ");
+            Console.WriteLine("Current tickers: " + Environment.NewLine);
+            var tickers = _file.GetAll();
+
+            foreach (string t in tickers)
+            {
+                Console.WriteLine(t);
+            }
+
+            Console.Write("Specify ticker to remove: ");
             var ticker = Console.ReadLine();
+            _file.RemoveFromFile(ticker);
         }
     }
 }
