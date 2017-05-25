@@ -33,11 +33,11 @@ namespace StockPrices.Excel
             }
             catch (IOException ex)
             {
-                // Handle IO exception & log
+                _helper.HandleIOException();
             }
             catch (Exception ex)
             {
-                // Handle other exceptions & log
+                _helper.HandleGeneralException(ex);
             }
         }
     }

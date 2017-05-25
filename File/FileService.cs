@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockPrices.Helper;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,10 +12,11 @@ namespace StockPrices.File
     {
         private static readonly String appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private static readonly String tickerFilePath = Path.Combine(appDataPath + "\\Tickers.txt");
+        private IHelpService _helper;
 
-        public FileService()
+        public FileService(IHelpService helper)
         {
-
+            _helper = helper;
         }
 
         public void WriteToFile(String ticker)
@@ -29,7 +31,7 @@ namespace StockPrices.File
             }
             catch (IOException ex)
             {
-                // Append error handling & logging
+                _helper.HandleIOException();
             }
         }
 
@@ -51,7 +53,7 @@ namespace StockPrices.File
             }
             catch (IOException ex)
             {
-                // Append error handling & logging
+                _helper.HandleIOException();
             }
         }
 
@@ -71,7 +73,7 @@ namespace StockPrices.File
             }
             catch (IOException ex)
             {
-                // Append error handling & logging
+                _helper.HandleIOException();
             }
             return tickers;
         }

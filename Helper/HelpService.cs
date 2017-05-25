@@ -34,6 +34,22 @@ namespace StockPrices.Helper
             return predicateUrl;
         }
 
+        public void HandleIOException()
+        {
+            Console.Clear();
+            Console.WriteLine("Make sure the file isn't open elsewhere and try again!");
+            System.Threading.Thread.Sleep(2000);
+        }
+
+        public void HandleGeneralException(Exception exception)
+        {
+            Console.Clear();
+            Console.WriteLine("Please pass this information to the author:" + Environment.NewLine);
+            Console.WriteLine(exception.Message);
+            Console.WriteLine(Environment.NewLine + "Press any key to exit...");
+            Console.ReadKey();
+        }
+
         /// <summary>
         /// Generic method to convert list to DataTable
         /// </summary>
