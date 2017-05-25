@@ -1,2 +1,2 @@
 # stock-price-script
-simple powershell routine to acquire stock data to excel
+Console app to fetch stock info via tickers
