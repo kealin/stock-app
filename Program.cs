@@ -1,4 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
+using StockPrices.File;
+using StockPrices.Helper;
 using StockPrices.Menu;
 using StockPrices.Parser;
 using StockPrices.Ticker;
@@ -13,8 +15,7 @@ namespace StockPrices
 {
     class Program
     {
-        private static IMainMenu _mainMenu;
-        private static ITickerService _tickerService;
+        private static IMenus _menus;
 
         static void Main(string[] args)
         {
@@ -24,17 +25,18 @@ namespace StockPrices
         static void Run()
         {
             Init();
-            int? task = _mainMenu.EntryScreen();
+             _menus.EntryScreen();
         }
 
         static void Init()
         {
             IUnityContainer container = new UnityContainer();
             container.RegisterType<ICsvParser, CsvParser>();
-            container.RegisterType<IMainMenu, MainMenu>();
+            container.RegisterType<IMenus, Menus>();
             container.RegisterType<ITickerService, TickerService>();
-            _mainMenu = container.Resolve<IMainMenu>();
-            _tickerService = container.Resolve<ITickerService>(); 
+            container.RegisterType<IHelpService, HelpService>();
+            container.RegisterType<IFileService, FileService>();
+            _menus = container.Resolve<IMenus>();
         }
     }
 }

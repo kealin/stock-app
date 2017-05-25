@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace StockPrices.Menu
 {
-    public interface IMainMenu
+    public interface IMenus
     {
-       int? EntryScreen();
+       void EntryScreen();
     }
 }
