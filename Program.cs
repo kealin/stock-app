@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using StockPrices.Excel;
 using StockPrices.File;
 using StockPrices.Helper;
 using StockPrices.Menu;
@@ -36,6 +37,7 @@ namespace StockPrices
             container.RegisterType<ITickerService, TickerService>();
             container.RegisterType<IHelpService, HelpService>();
             container.RegisterType<IFileService, FileService>();
+            container.RegisterType<IExcelService, ExcelService>();
             _menus = container.Resolve<IMenus>();
         }
     }
