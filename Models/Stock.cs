@@ -10,10 +10,10 @@ namespace StockPrices.Models
     {
         public string Symbol { get; set; }
         public string Name { get; set; }
-        public decimal Bid { get; set; }
-        public decimal Ask { get; set; }
-        public decimal Open { get; set; }
-        public decimal PreviousClose { get; set; }
-        public decimal Last { get; set; }
+        public string Bid { get; set; }
+        public string Ask { get; set; }
+        public string Open { get; set; }
+        public string PreviousClose { get; set; }
+        public string Last { get; set; }
     }
 }

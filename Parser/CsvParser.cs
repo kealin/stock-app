@@ -1,4 +1,5 @@
-﻿using StockPrices.Models;
+﻿using StockPrices.Helper;
+using StockPrices.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,14 +28,13 @@ namespace StockPrices.Parser
                 string[] cols = row.Split(',');
 
                 Stock p = new Stock();
-                p.Symbol = cols[0];
-                p.Name = cols[1];
-                p.Bid = Convert.ToDecimal(cols[2]);
-                p.Ask = Convert.ToDecimal(cols[3]);
-                p.Open = Convert.ToDecimal(cols[4]);
-                p.PreviousClose = Convert.ToDecimal(cols[5]);
-                p.Last = Convert.ToDecimal(cols[6]);
-
+                p.Symbol = cols[0].Replace("\"", "");
+                p.Name = cols[1].Replace("\"", ""); ;
+                p.Bid = cols[2].Replace("\"", ""); ;
+                p.Ask = cols[3].Replace("\"", ""); ;
+                p.Open = cols[4].Replace("\"", ""); ;
+                p.PreviousClose = cols[5].Replace("\"", ""); ;
+                p.Last = cols[6].Replace("\"", ""); ;
                 stocks.Add(p);
             }
 
