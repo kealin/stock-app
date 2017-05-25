@@ -1,14 +1,20 @@
-﻿using System;
+﻿using StockPrices.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace stock_prices
+namespace StockPrices.Parser
 {
-     public class CsvParser
+     public class CsvParser : ICsvParser
     {
-        public static List<Stock> Parse(string csvData)
+        /// <summary>
+        /// Helper for parsing the Yahoo API CSV Data into a list of stocks
+        /// </summary>
+        /// <param name="csvData">String containing CSV for stocks</param>
+        /// <returns>List of stock objects</returns>
+        public List<Stock> Parse(string csvData)
         {
             List<Stock> stocks = new List<Stock>();
 
