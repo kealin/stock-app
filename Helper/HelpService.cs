@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockPrices.Helper
 {
-    public class HelpService
+    public class HelpService : IHelpService
     {
         /// <summary>
         /// Builds predicate based on user input

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StockPrices.Helpers
+namespace StockPrices.Helper
 {
     public interface IHelpService
     {
